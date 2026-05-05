@@ -20,7 +20,7 @@
     <section id="app" class="hidden">
         <header class="app-header">
             <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="SEARCH RECIPE..." oninput="filterRecipes()">
+                <input type="text" id="searchInput" placeholder="SEARCH IN COLLECTION..." oninput="filterRecipes()">
             </div>
         </header>
 
@@ -31,6 +31,8 @@
             </aside>
 
             <main class="main-content">
+                <input type="hidden" id="currentRecipeId" value="">
+                
                 <div class="photo-section">
                     <div class="card drop-zone" id="mainDropZone" onclick="document.getElementById('main-file').click()">
                         <img id="main-preview" class="hidden preview-img">
@@ -43,12 +45,12 @@
                 </div>
 
                 <div class="recipe-info">
-                    <h1 contenteditable="true" class="pixel-title outline-text" id="recipeName" data-placeholder="MASTERPIECE NAME" oninput="autoSave()"></h1>
+                    <h1 contenteditable="true" class="pixel-title outline-text" id="recipeName" data-placeholder="MASTERPIECE NAME"></h1>
                     <div class="meta-row pixel-text">
-                        <span contenteditable="true" id="cookingTime" data-placeholder="Cooking Time" oninput="autoSave()"></span> • 
-                        <span contenteditable="true" id="difficulty" data-placeholder="Level" oninput="autoSave()"></span>
+                        <span contenteditable="true" id="cookingTime" data-placeholder="Cooking Time"></span> • 
+                        <span contenteditable="true" id="difficulty" data-placeholder="Level"></span>
                     </div>
-                    <p contenteditable="true" class="small-note" id="recipeNote" data-placeholder="A short mini-note about this dish..." oninput="autoSave()"></p>
+                    <p contenteditable="true" class="small-note" id="recipeNote" data-placeholder="A short mini-note about this dish..."></p>
                 </div>
 
                 <div class="details-grid">
@@ -60,19 +62,19 @@
                                 <input type="file" id="ing-file-input" class="hidden" accept="image/*" onchange="handleMultiUpload(this)">
                             </div>
                         </div>
-                        <div contenteditable="true" class="editable-area" id="ingredients" data-placeholder="List ingredients here..." oninput="autoSave()"></div>
+                        <div contenteditable="true" class="editable-area" id="ingredients" data-placeholder="List ingredients here..."></div>
                     </div>
 
                     <div class="card">
                         <h3 class="pixel-text">INSTRUCTIONS</h3>
-                        <div contenteditable="true" class="editable-area" id="instructions" data-placeholder="Step by step instructions..." oninput="autoSave()"></div>
+                        <div contenteditable="true" class="editable-area" id="instructions" data-placeholder="Step by step instructions..."></div>
                     </div>
                 </div>
 
                 <div class="app-actions">
-                    <button class="main-btn" onclick="saveRecipe()">SAVE</button>
+                    <button class="main-btn" onclick="saveRecipe()">SAVE RECIPE</button>
                     <button class="main-btn secondary" onclick="toggleCookingMode()">COOK</button>
-                    <button class="main-btn secondary" onclick="resetForm()">NEW</button>
+                    <button class="main-btn secondary" onclick="resetForm()">NEW RECIPE</button>
                 </div>
             </main>
         </div>
