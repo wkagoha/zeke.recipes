@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Zachi Recipes Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars-container" id="starContainer"></div>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1 class="pixel-title outline-text">ZACHI RECIPES</h1>
+            <button class="main-btn" onclick="openApp()">OPEN BOOK</button>
+        </div>
+    </section>
+
+    <section id="app" class="hidden">
+        <header class="app-header">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Find recipe..." oninput="filterRecipes()">
+            </div>
+        </header>
+
+        <div class="app-layout">
+            <aside class="sidebar card">
+                <div class="sidebar-header">
+                    <span class="pixel-text">COLLECTION</span>
+                </div>
+                <div id="recipeList" class="scroll-list"></div>
+            </aside>
+
+            <main class="main-content">
+                <div class="photo-section">
+                    <!-- ИЗМЕНЕНИЕ: onclick добавлен для вызова выбора файла -->
+                    <div class="card drop-zone" id="mainDropZone" onclick="document.getElementById('main-file').click()">
+                        <img id="main-preview" class="hidden preview-img">
+                        <button id="remove-main-img" class="delete-btn hidden" onclick="removeMainPhoto(event)">×</button>
+                        <div id="main-label" class="placeholder-content">
+                            <span class="pixel-text">ADD PHOTO</span>
+                        </div>
+                        <input type="file" id="main-file" class="hidden" accept="image/*" onchange="fileInputHandler(this, 'main-preview')">
+                    </div>
+                </div>
+
+                <div class="recipe-info">
+                    <h1 contenteditable="true" class="pixel-title outline-text" id="recipeName" data-placeholder="RECIPE NAME" oninput="autoSave()"></h1>
+                    <div class="meta-row pixel-text">
+                        <span contenteditable="true" id="cookingTime" data-placeholder="Time" oninput="autoSave()"></span> • 
+                        <span contenteditable="true" id="difficulty" data-placeholder="Difficulty" oninput="autoSave()"></span>
+                    </div>
+                    <p contenteditable="true" class="small-note" id="recipeNote" data-placeholder="Short note..." oninput="autoSave()"></p>
+                </div>
+
+                <div class="details-grid">
+                    <div class="card">
+                        <h3 class="pixel-text">INGREDIENTS</h3>
+                        <div id="ingredients-gallery" class="ing-grid">
+                            <div class="drop-zone mini" id="add-ing-btn" onclick="triggerIngUpload(event)">
+                                <span class="pixel-text">+</span>
+                                <input type="file" id="ing-file-input" class="hidden" accept="image/*" onchange="handleMultiUpload(this)">
+                            </div>
+                        </div>
+                        <div contenteditable="true" class="editable-area" id="ingredients" data-placeholder="List here..." oninput="autoSave()"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="pixel-text">INSTRUCTIONS</h3>
+                        <div contenteditable="true" class="editable-area" id="instructions" data-placeholder="Steps here..." oninput="autoSave()"></div>
+                    </div>
+                </div>
+
+                <div class="app-actions">
+                    <button class="main-btn" onclick="saveRecipe()">SAVE</button>
+                    <button class="main-btn secondary" onclick="toggleCookingMode()">COOK</button>
+                    <button class="main-btn secondary" onclick="resetForm()">NEW</button>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <div id="cookingMode" class="hidden mode-overlay">
+        <button class="close-mode" onclick="toggleCookingMode()">×</button>
+        <div class="mode-grid">
+            <div class="mode-left">
+                <div class="mode-img-card">
+                    <img id="modeMainImg" src="" alt="">
+                </div>
+                <div class="mode-notes card">
+                    <h4 class="pixel-text">NOTES</h4>
+                    <p id="modeNotes" class="pixel-text-small"></p>
+                </div>
+            </div>
+            <div class="mode-right">
+                <h2 id="modeTitleDisplay" class="pixel-title outline-text"></h2>
+                <div class="mode-columns">
+                    <div class="mode-card card">
+                        <h4 class="pixel-text">INGREDIENTS</h4>
+                        <div id="modeIngredientsDisplay" class="mode-text"></div>
+                    </div>
+                    <div class="mode-card card">
+                        <h4 class="pixel-text">INSTRUCTIONS</h4>
+                        <div id="modeInstructionsDisplay" class="mode-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
