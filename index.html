@@ -20,21 +20,18 @@
     <section id="app" class="hidden">
         <header class="app-header">
             <div class="search-wrapper">
-                <input type="text" id="searchInput" placeholder="Find recipe..." oninput="filterRecipes()">
+                <input type="text" id="searchInput" placeholder="SEARCH RECIPE..." oninput="filterRecipes()">
             </div>
         </header>
 
         <div class="app-layout">
             <aside class="sidebar card">
-                <div class="sidebar-header">
-                    <span class="pixel-text">COLLECTION</span>
-                </div>
+                <div class="sidebar-header"><span class="pixel-text">COLLECTION</span></div>
                 <div id="recipeList" class="scroll-list"></div>
             </aside>
 
             <main class="main-content">
                 <div class="photo-section">
-                    <!-- ИЗМЕНЕНИЕ: onclick добавлен для вызова выбора файла -->
                     <div class="card drop-zone" id="mainDropZone" onclick="document.getElementById('main-file').click()">
                         <img id="main-preview" class="hidden preview-img">
                         <button id="remove-main-img" class="delete-btn hidden" onclick="removeMainPhoto(event)">×</button>
@@ -46,12 +43,12 @@
                 </div>
 
                 <div class="recipe-info">
-                    <h1 contenteditable="true" class="pixel-title outline-text" id="recipeName" data-placeholder="RECIPE NAME" oninput="autoSave()"></h1>
+                    <h1 contenteditable="true" class="pixel-title outline-text" id="recipeName" data-placeholder="MASTERPIECE NAME" oninput="autoSave()"></h1>
                     <div class="meta-row pixel-text">
-                        <span contenteditable="true" id="cookingTime" data-placeholder="Time" oninput="autoSave()"></span> • 
-                        <span contenteditable="true" id="difficulty" data-placeholder="Difficulty" oninput="autoSave()"></span>
+                        <span contenteditable="true" id="cookingTime" data-placeholder="Cooking Time" oninput="autoSave()"></span> • 
+                        <span contenteditable="true" id="difficulty" data-placeholder="Level" oninput="autoSave()"></span>
                     </div>
-                    <p contenteditable="true" class="small-note" id="recipeNote" data-placeholder="Short note..." oninput="autoSave()"></p>
+                    <p contenteditable="true" class="small-note" id="recipeNote" data-placeholder="A short mini-note about this dish..." oninput="autoSave()"></p>
                 </div>
 
                 <div class="details-grid">
@@ -63,12 +60,12 @@
                                 <input type="file" id="ing-file-input" class="hidden" accept="image/*" onchange="handleMultiUpload(this)">
                             </div>
                         </div>
-                        <div contenteditable="true" class="editable-area" id="ingredients" data-placeholder="List here..." oninput="autoSave()"></div>
+                        <div contenteditable="true" class="editable-area" id="ingredients" data-placeholder="List ingredients here..." oninput="autoSave()"></div>
                     </div>
 
                     <div class="card">
                         <h3 class="pixel-text">INSTRUCTIONS</h3>
-                        <div contenteditable="true" class="editable-area" id="instructions" data-placeholder="Steps here..." oninput="autoSave()"></div>
+                        <div contenteditable="true" class="editable-area" id="instructions" data-placeholder="Step by step instructions..." oninput="autoSave()"></div>
                     </div>
                 </div>
 
@@ -85,30 +82,18 @@
         <button class="close-mode" onclick="toggleCookingMode()">×</button>
         <div class="mode-grid">
             <div class="mode-left">
-                <div class="mode-img-card">
-                    <img id="modeMainImg" src="" alt="">
-                </div>
-                <div class="mode-notes card">
-                    <h4 class="pixel-text">NOTES</h4>
-                    <p id="modeNotes" class="pixel-text-small"></p>
-                </div>
+                <div class="mode-img-card"><img id="modeMainImg" src=""></div>
+                <div class="mode-notes card"><h4 class="pixel-text">NOTES</h4><p id="modeNotes"></p></div>
             </div>
             <div class="mode-right">
                 <h2 id="modeTitleDisplay" class="pixel-title outline-text"></h2>
                 <div class="mode-columns">
-                    <div class="mode-card card">
-                        <h4 class="pixel-text">INGREDIENTS</h4>
-                        <div id="modeIngredientsDisplay" class="mode-text"></div>
-                    </div>
-                    <div class="mode-card card">
-                        <h4 class="pixel-text">INSTRUCTIONS</h4>
-                        <div id="modeInstructionsDisplay" class="mode-text"></div>
-                    </div>
+                    <div class="mode-card card"><h4 class="pixel-text">INGREDIENTS</h4><div id="modeIngredientsDisplay"></div></div>
+                    <div class="mode-card card"><h4 class="pixel-text">INSTRUCTIONS</h4><div id="modeInstructionsDisplay"></div></div>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

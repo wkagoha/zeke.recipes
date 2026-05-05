@@ -4,11 +4,9 @@
     --border: 2px solid #F5F5DC;
     --radius-s: 12px;
     --radius-m: 20px;
-    --radius-l: 28px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body { 
     background-color: var(--blue); 
     font-family: 'VT323', monospace; 
@@ -19,99 +17,49 @@ body {
 
 .hidden { display: none !important; }
 
-/* 1. ЗВЁЗДЫ */
-.stars-container {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 0;
-}
-.star {
-    position: absolute; background: var(--cream);
-    border-radius: 50%; opacity: 0.6;
-    animation: twinkle 3s infinite ease-in-out;
-}
+/* ЗВЁЗДЫ */
+.stars-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.star { position: absolute; background: var(--cream); border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
 @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.2); } }
 
-/* 2. ЕДИНЫЙ СТИЛЬ КНОПОК И КАРТОЧЕК */
-.card {
-    background: var(--cream); color: var(--blue);
-    border-radius: var(--radius-m); padding: 20px;
-    border: var(--border); box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+/* ПОИСКОВИК */
+.app-header { padding: 20px 0; display: flex; justify-content: center; width: 100%; position: relative; z-index: 10; }
+.search-wrapper { width: 100%; max-width: 400px; }
+.search-wrapper input {
+    width: 100%; background: rgba(245, 245, 220, 0.1); border: var(--border);
+    border-radius: var(--radius-s); padding: 12px; color: var(--cream);
+    font-family: 'VT323'; font-size: 1.5rem; outline: none; text-align: center; transition: 0.3s;
 }
+.search-wrapper input:focus { background: var(--cream); color: var(--blue); box-shadow: 0 0 20px var(--cream); }
 
-.main-btn {
-    background: var(--cream); color: var(--blue);
-    border: var(--border); border-radius: var(--radius-s);
-    padding: 10px 25px; font-family: 'VT323'; font-size: 1.4rem;
-    cursor: pointer; transition: 0.2s;
-}
-.main-btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--cream); }
+/* КАРТОЧКИ И КНОПКИ */
+.card { background: var(--cream); color: var(--blue); border-radius: var(--radius-m); padding: 20px; border: var(--border); box-shadow: 6px 6px 0 rgba(0,0,0,0.2); }
+.main-btn { background: var(--cream); color: var(--blue); border: var(--border); border-radius: var(--radius-s); padding: 10px 25px; font-family: 'VT323'; font-size: 1.4rem; cursor: pointer; }
 .main-btn.secondary { background: transparent; color: var(--cream); }
 
-/* ИСПРАВЛЕНИЕ ПРЫЖКА КОНТЕНТА */
-#app { 
-    position: relative; z-index: 1; 
-    opacity: 0; animation: fadeIn 0.4s forwards; 
-    min-height: 100vh; display: flex; flex-direction: column;
-}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+#app { position: relative; z-index: 1; opacity: 0; animation: fadeIn 0.4s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+#hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; z-index: 5; }
 
-#hero { height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 2; }
+.app-layout { display: grid; grid-template-columns: 220px 1fr; gap: 30px; padding: 20px; max-width: 1200px; margin: 0 auto; }
+.drop-zone { border: 2px dashed var(--blue); border-radius: var(--radius-m); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; }
+.delete-btn { position: absolute; top: 10px; right: 10px; width: 26px; height: 26px; background: var(--blue); color: var(--cream); border: var(--border); border-radius: 6px; cursor: pointer; z-index: 10; }
 
-/* Layout */
-.app-layout { 
-    display: grid; grid-template-columns: 220px 1fr; 
-    gap: 30px; padding: 0 40px 40px; 
-    max-width: 1200px; margin: 0 auto; width: 100%;
-}
-
-.drop-zone {
-    border: 2px dashed var(--blue); border-radius: var(--radius-m);
-    aspect-ratio: 16/9; display: flex; align-items: center; 
-    justify-content: center; cursor: pointer; position: relative; overflow: hidden;
-}
-.photo-section { max-width: 450px; margin: 0 auto 20px; width: 100%; }
-
-/* Delete (X) style */
-.delete-btn {
-    position: absolute; top: 10px; right: 10px;
-    width: 26px; height: 26px; background: var(--blue);
-    color: var(--cream); border: var(--border);
-    border-radius: 6px; cursor: pointer; font-size: 18px;
-    z-index: 10;
-}
-
-/* Typography */
-.pixel-title { font-size: clamp(2.5rem, 6vw, 4rem); text-align: center; line-height: 1; }
+.pixel-title { font-size: clamp(2.5rem, 6vw, 4rem); text-align: center; }
 .outline-text { text-shadow: 3px 3px 0 var(--blue); }
-.recipe-info { text-align: center; margin-bottom: 30px; }
-.meta-row { margin: 10px 0; opacity: 0.9; }
+.recipe-info { text-align: center; margin-bottom: 20px; }
+.small-note { font-style: italic; opacity: 0.8; margin-top: 5px; font-size: 1.2rem; }
 
+[contenteditable=true]:empty:before { content: attr(data-placeholder); opacity: 0.4; }
 .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.editable-area { min-height: 150px; outline: none; margin-top: 10px; line-height: 1.4; }
+.editable-area { min-height: 120px; outline: none; margin-top: 10px; font-size: 1.1rem; }
 
-.ing-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+.ing-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
 .ing-container { width: 50px; height: 50px; border-radius: 8px; overflow: hidden; position: relative; border: 1px solid var(--blue); }
 .preview-img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Search bar */
-.app-header { padding: 30px 0; display: flex; justify-content: center; }
-.search-wrapper input {
-    background: transparent; border: var(--border); border-radius: var(--radius-s);
-    padding: 8px 20px; color: var(--cream); font-family: 'VT323'; font-size: 1.2rem; outline: none;
-}
-
-/* Cooking Mode */
-.mode-overlay { 
-    position: fixed; inset: 0; background: var(--blue); 
-    z-index: 1000; padding: 40px; overflow-y: auto; 
-}
+.mode-overlay { position: fixed; inset: 0; background: var(--blue); z-index: 1000; padding: 40px; overflow-y: auto; }
 .mode-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; max-width: 1100px; margin: 0 auto; }
-.mode-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-.close-mode { position: fixed; top: 20px; right: 30px; background: none; border: none; color: var(--cream); font-size: 50px; cursor: pointer; }
+.app-actions { display: flex; justify-content: center; gap: 15px; margin-top: 30px; padding-bottom: 40px; }
 
-.app-actions { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
-
-@media (max-width: 800px) {
-    .app-layout, .details-grid, .mode-grid, .mode-columns { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-}
+@media (max-width: 800px) { .app-layout, .details-grid, .mode-grid { grid-template-columns: 1fr; } .sidebar { display: none; } }
